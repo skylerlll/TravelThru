@@ -10,6 +10,10 @@ import java.time.ZoneId
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+    private var cityNames = arrayOf("hhh", "kkk")
+    private var cityTimeDetails = arrayOf("hhh", "kkk")
+    private var cityTimes = arrayOf("00:00", "01:00")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -22,10 +26,8 @@ class MainActivity : AppCompatActivity() {
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = RecyclerAdapter()
+        val adapter = RecyclerAdapter(cityNames, cityTimeDetails, cityTimes)
+        recyclerView.adapter = adapter
 
-        val items = TimeZone.getAvailableIDs().map { id ->
-            val zone = ZoneId.of(id)
-        }
     }
 }

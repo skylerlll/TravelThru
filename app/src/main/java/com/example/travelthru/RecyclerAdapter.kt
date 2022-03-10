@@ -1,40 +1,48 @@
 package com.example.travelthru
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 
-class RecyclerAdapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
-    private var cityNames = arrayOf("hhh")
-    private var cityTimeDetails = arrayOf("hhh")
-    private var cityTimes = arrayOf("00:00")
+class RecyclerAdapter(private val cityNames: Array<String>
+, private var cityTimeDetails: Array<String>
+, private var cityTimes: Array<String>):
+    RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerAdapter.ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.city_layout, parent, false)
+    class ViewHolder(view:View): RecyclerView.ViewHolder(view) {
+        var cityName: TextView
+        var cityTimeDetail: TextView
+        var cityTime: TextView
+        init {
+            cityName = view.findViewById(R.id.city_name)
+            cityTimeDetail = view.findViewById(R.id.city_time_detail)
+            cityTime = view.findViewById(R.id.city_current_time)
+
+            view.setOnClickListener {
+                val intent = Intent(it.context, ConverterActivity::class.java)
+                intent.putExtra("position", adapterPosition)
+                it.context.startActivity(intent)
+            }
+        }
+    }
+
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+        val v = LayoutInflater.from(viewGroup.context)
+            .inflate(R.layout.city_layout, viewGroup, false)
         return ViewHolder(v)
     }
 
-    override fun getItemCount(): Int {
-        return cityNames.size
-    }
-
-    override fun onBindViewHolder(holder: RecyclerAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.cityName.text = cityNames[position]
         holder.cityTimeDetail.text = cityTimeDetails[position]
         holder.cityTime.text = cityTimes[position]
     }
 
-    inner class ViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
-        var cityName: TextView
-        var cityTimeDetail: TextView
-        var cityTime: TextView
-
-        init {
-            cityName = itemView.findViewById(R.id.city_name)
-            cityTimeDetail = itemView.findViewById(R.id.city_time_detail)
-            cityTime = itemView.findViewById(R.id.city_current_time)
-        }
+    override fun getItemCount(): Int {
+        return cityNames.size
     }
 }
