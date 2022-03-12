@@ -8,9 +8,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 
-class RecyclerAdapter(private val cityNames: Array<String>
-, private var cityTimeDetails: Array<String>
-, private var cityTimes: Array<String>):
+class RecyclerAdapter(private val cities: ArrayList<CityTimeCard>):
     RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
     class ViewHolder(view:View): RecyclerView.ViewHolder(view) {
@@ -37,12 +35,12 @@ class RecyclerAdapter(private val cityNames: Array<String>
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.cityName.text = cityNames[position]
-        holder.cityTimeDetail.text = cityTimeDetails[position]
-        holder.cityTime.text = cityTimes[position]
+        holder.cityName.text = cities[position].getCityName()
+        holder.cityTimeDetail.text = cities[position].getCityTimeDetail()
+        holder.cityTime.text = cities[position].getCityTime()
     }
 
     override fun getItemCount(): Int {
-        return cityNames.size
+        return cities.size
     }
 }

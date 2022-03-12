@@ -6,13 +6,10 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.time.ZoneId
-import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
-    private var cityNames = arrayOf("hhh", "kkk")
-    private var cityTimeDetails = arrayOf("hhh", "kkk")
-    private var cityTimes = arrayOf("00:00", "01:00")
+    private var cities = ArrayList<CityTimeCard>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,10 +21,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        cities.add(CityTimeCard("America/Los_Angeles"))
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val adapter = RecyclerAdapter(cityNames, cityTimeDetails, cityTimes)
+        val adapter = RecyclerAdapter(cities)
         recyclerView.adapter = adapter
-
     }
 }
