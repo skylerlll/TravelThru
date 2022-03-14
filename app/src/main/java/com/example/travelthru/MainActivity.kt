@@ -17,11 +17,11 @@ class MainActivity : AppCompatActivity() {
 
         val addCity = findViewById<Button>(R.id.add_city)
         addCity.setOnClickListener {
-            val intent = Intent(this, MapsActivity::class.java)
+            val intent = Intent(this, AddCityActivity::class.java)
             startActivity(intent)
         }
 
-        cities.add(CityTimeCard("America/Los_Angeles"))
+        cities.add(CityTimeCard("Los_Angeles"))
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         val adapter = RecyclerAdapter(cities)
