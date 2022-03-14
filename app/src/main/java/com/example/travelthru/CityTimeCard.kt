@@ -1,10 +1,11 @@
 package com.example.travelthru
 
+import java.time.OffsetDateTime
 import java.util.*
 
 class CityTimeCard (name: String) {
     private var cityName: String = ""
-    private var cityTimeDetail: String = ""
+    private var cityTimeDetail: Int = 0
     private var cityTime: String = ""
 
     init {
@@ -14,14 +15,14 @@ class CityTimeCard (name: String) {
     }
 
     private fun setCityTime(): String {
-        val tz = TimeZone.getTimeZone(this.cityName)
-        val calender = Calendar.getInstance(tz)
+        val timezone = TimeZone.getTimeZone(this.cityName)
+        val calender = Calendar.getInstance(timezone)
         return calender.time.toString()
     }
 
-    private fun setCityTimeDetail(): String {
-        val tz = TimeZone.getTimeZone(this.cityName)
-        return "GMT " + tz.rawOffset
+    private fun setCityTimeDetail(): Int {
+        val timezone = TimeZone.getTimeZone(this.cityName)
+        return GregorianCalendar.getInstance(timezone).timeZone.rawOffset
     }
 
     fun getCityName(): String {
@@ -32,7 +33,7 @@ class CityTimeCard (name: String) {
         return this.cityTime
     }
 
-    fun getCityTimeDetail(): String {
+    fun getCityTimeDetail(): Int {
         return this.cityTimeDetail
     }
 }

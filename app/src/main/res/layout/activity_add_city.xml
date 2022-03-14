@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Search a city..."
+        android:hint="@string/search_a_city"
         app:layout_constraintEnd_toStartOf="@+id/searchCityBtn"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

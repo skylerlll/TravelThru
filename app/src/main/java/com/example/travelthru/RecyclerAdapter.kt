@@ -1,5 +1,6 @@
 package com.example.travelthru
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,7 @@ class RecyclerAdapter(private val cities: ArrayList<CityTimeCard>):
             view.setOnClickListener {
                 val intent = Intent(it.context, ConverterActivity::class.java)
                 intent.putExtra("position", adapterPosition)
+                intent.putExtra("GMT", cityTimeDetail.text)
                 it.context.startActivity(intent)
             }
         }
@@ -34,9 +36,10 @@ class RecyclerAdapter(private val cities: ArrayList<CityTimeCard>):
         return ViewHolder(v)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.cityName.text = cities[position].getCityName()
-        holder.cityTimeDetail.text = cities[position].getCityTimeDetail()
+        holder.cityTimeDetail.text = cities[position].getCityTimeDetail().toString()
         holder.cityTime.text = cities[position].getCityTime()
     }
 

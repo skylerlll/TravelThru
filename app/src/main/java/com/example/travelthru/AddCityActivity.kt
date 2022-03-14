@@ -1,6 +1,8 @@
 package com.example.travelthru
 
 import android.annotation.SuppressLint
+import android.content.DialogInterface
+import android.content.Intent
 import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -43,6 +46,26 @@ class AddCityActivity : AppCompatActivity(), OnMapReadyCallback{
                 val lat = LatLng(address.latitude, address.longitude)
                 addMarker(googleMap, lat, city)
             }
+        }
+
+        googleMap.setOnMarkerClickListener { marker ->
+            val alertDialog: AlertDialog? = this.let {
+                val builder = AlertDialog.Builder(it)
+                builder.setMessage(R.string.setCity)
+                    .setPositiveButton(R.string.yes,
+                        DialogInterface.OnClickListener { dialog, id ->
+                            val intent = Intent(this, MainActivity::class.java)
+                            intent.putExtra("cityName", marker.title)
+                            startActivity(intent)
+                        })
+                    .setNegativeButton(R.string.cancel,
+                        DialogInterface.OnClickListener { dialog, id ->
+                            dialog.dismiss()
+                        })
+                builder.create()
+            }
+            alertDialog?.show()
+            true
         }
     }
 

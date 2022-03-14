@@ -15,13 +15,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val bundle :Bundle ?=intent.extras
+        if (bundle!=null){
+            val name = bundle.getString("cityName") // 1
+            if (name != null) {
+                cities.add(CityTimeCard(name))
+            }
+        } else {
+            cities.add(CityTimeCard("Vancouver"))
+        }
+
         val addCity = findViewById<Button>(R.id.add_city)
         addCity.setOnClickListener {
             val intent = Intent(this, AddCityActivity::class.java)
             startActivity(intent)
         }
 
-        cities.add(CityTimeCard("Los_Angeles"))
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         val adapter = RecyclerAdapter(cities)
