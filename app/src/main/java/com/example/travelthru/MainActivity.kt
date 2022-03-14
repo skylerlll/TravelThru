@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
                 cities.add(CityTimeCard(name))
             }
         } else {
-            cities.add(CityTimeCard("Vancouver"))
+            cities.add(CityTimeCard("Asia/Tokyo"))
         }
 
         val addCity = findViewById<Button>(R.id.add_city)

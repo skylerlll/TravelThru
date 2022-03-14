@@ -16,13 +16,12 @@ class CityTimeCard (name: String) {
 
     private fun setCityTime(): String {
         val timezone = TimeZone.getTimeZone(this.cityName)
-        val calender = Calendar.getInstance(timezone)
-        return calender.time.toString()
+        return GregorianCalendar(timezone).time.toString()
     }
 
     private fun setCityTimeDetail(): Int {
         val timezone = TimeZone.getTimeZone(this.cityName)
-        return GregorianCalendar.getInstance(timezone).timeZone.rawOffset
+        return GregorianCalendar(timezone).get(Calendar.ZONE_OFFSET)/(60*60*1000)
     }
 
     fun getCityName(): String {
